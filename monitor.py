@@ -62,10 +62,10 @@ def parse_unknown_args(unknown: list[str]) -> dict:
     return extra_args
 
 
-def read_serial(serial: serial.Serial, queue: Queue):
+def read_serial(ser: serial.Serial, queue: Queue):
     data = ""
     while True:
-        data = data + serial.read_all().decode("utf-8", errors="replace")
+        data = data + ser.read_all().decode("utf-8", errors="replace")
 
         nl = data.find('\n')
         if nl >= 0:
@@ -139,10 +139,10 @@ def run_interactive(ser: serial.Serial, dumpfile, plugin_filters, extra_args) ->
         return 0
 
 
-def run_noninteractive(serial: serial.Serial, dumpfile, plugin_filters, extra_args) -> int:
+def run_noninteractive(ser: serial.Serial, dumpfile, plugin_filters, extra_args) -> int:
     data = ""
     while True:
-        data = data + serial.read_all().decode("utf-8", errors="replace")
+        data = data + ser.read_all().decode("utf-8", errors="replace")
 
         nl = data.find('\n')
         if nl >= 0:
